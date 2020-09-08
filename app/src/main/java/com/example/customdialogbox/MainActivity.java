@@ -3,11 +3,15 @@ package com.example.customdialogbox;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -17,30 +21,32 @@ public class MainActivity extends AppCompatActivity {
         Button acceptBtn = findViewById(R.id.btn_accept);
         Button rejectBtn = findViewById(R.id.btn_reject);
 
+
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this,R.style.CustomAlertDialog);
                 ViewGroup viewGroup = findViewById(android.R.id.content);
-                View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.custom_view, viewGroup, false);
+                View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.sure_dialog, viewGroup, false);
+                Button buttonOk=dialogView.findViewById(R.id.btn_yes);
+                ImageButton btnClose = dialogView.findViewById(R.id.btn_exit);
+
                 builder.setView(dialogView);
-                Button btn = dialogView.findViewById(R.id.buttonOk);
-
                 final AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-
-                btn.setOnClickListener(new View.OnClickListener() {
+                buttonOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
                     }
                 });
-            }
-        });
 
-        rejectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                btnClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();;
 
             }
         });
