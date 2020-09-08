@@ -50,5 +50,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        rejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this,R.style.CustomAlertDialog);
+                ViewGroup viewGroup = findViewById(android.R.id.content);
+                View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.success_dialog, viewGroup, false);
+                builder.setView(dialogView);
+                final AlertDialog alertDialog = builder.create();
+                alertDialog.show();;
+            }
+        });
     }
 }
